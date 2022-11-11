@@ -20,7 +20,7 @@ mypy = "^0.931"
 shiv = "^1.0.0"
 
 [tool.poetry.scripts]
-gcode_info = "gcode_info.console:main"
+gcode-info = "gcode_info.console:main"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
