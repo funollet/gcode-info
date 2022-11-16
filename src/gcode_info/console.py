@@ -20,7 +20,9 @@ def main(files):
     """Extract information from GCode files."""
 
     results = [parse_file(f) for f in files]
-    print(as_columns(results))
+
+    headers = ["Duration", "Filename"]
+    print(as_columns([headers] + results))
 
 
 if __name__ == "__main__":

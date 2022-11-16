@@ -12,7 +12,7 @@ help:
 
 # Run the app.
 run:
-  poetry run {{project}}
+  poetry run gcode-info tests/fixtures/files/Holder_Bosch_GSR_10p8V.gcode
 
 # Run linters and formatters.
 fmt:
