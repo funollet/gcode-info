@@ -11,8 +11,16 @@ def is_time(line: str) -> bool:
     return line.startswith(";TIME:")
 
 
+def is_filament_used(line: str) -> bool:
+    return line.lower().startswith(";filament used:")
+
+
 def parse_line_time(line: str) -> int:
     return int(line.partition(":")[-1])
+
+
+def parse_filament_used(line: str) -> float:
+    return float(line.partition(": ")[-1][:-1])
 
 
 HoursMinutes = namedtuple("HoursMinutes", ["hours", "minutes"])
@@ -29,10 +37,14 @@ class GcodeInfo:
     def set_time(self, line: str):
         self.seconds = parse_line_time(line)
 
+    def set_filament_used(self, line: str):
+        self.filament_used = parse_filament_used(line)
+
     def values(self) -> Tuple:
         duration = seconds_to_hm(self.seconds)
         values = (
             f" {duration.hours: >2}h {duration.minutes: >2}m",
+            f"{self.filament_used: >12.1f}m",
             self.fname,
         )
         return values
@@ -44,5 +56,7 @@ def parse_file(fname: str) -> Tuple:
     for line in getlines(fname):
         if is_time(line):
             data.set_time(line)
+        if is_filament_used(line):
+            data.set_filament_used(line)
 
     return data.values()

@@ -21,7 +21,7 @@ def main(files):
 
     results = [parse_file(f) for f in files]
 
-    headers = ["Duration", "Filename"]
+    headers = ["Duration", "Filament used", "Filename"]
     print(as_columns([headers] + results))
 
 
