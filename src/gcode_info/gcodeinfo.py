@@ -43,8 +43,8 @@ class GcodeInfo:
     def values(self) -> Tuple:
         duration = seconds_to_hm(self.seconds)
         values = (
-            f" {duration.hours: >2}h {duration.minutes: >2}m",
-            f"{self.filament_used: >12.1f}m",
+            f"{duration.hours}h {duration.minutes}m",
+            f"{self.filament_used:.1f}m",
             self.fname,
         )
         return values

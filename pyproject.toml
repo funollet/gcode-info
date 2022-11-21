@@ -7,6 +7,7 @@ license = "GNU GPL v3.0"
 
 [tool.poetry.dependencies]
 python = "^3.9"
+rich = "^12.6.0"
 
 [tool.poetry.dev-dependencies]
 isort = "^5.10.1"

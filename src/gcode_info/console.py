@@ -1,16 +1,9 @@
-from typing import Iterable
-
 import click
+from rich.console import Console
+from rich.table import Table
 
 from . import __version__
 from .gcodeinfo import parse_file
-
-MatrixOfStr = Iterable[Iterable[str]]
-
-
-def as_columns(iter: MatrixOfStr) -> str:
-    lines = ["\t".join(row) for row in iter]
-    return "\n".join(lines)
 
 
 @click.command()
@@ -21,8 +14,16 @@ def main(files):
 
     results = [parse_file(f) for f in files]
 
-    headers = ["Duration", "Filament used", "Filename"]
-    print(as_columns([headers] + results))
+    table = Table(box=None)
+    table.add_column("Duration", justify="right")
+    table.add_column("Filament used", justify="right")
+    table.add_column("Filename")
+
+    for row in results:
+        table.add_row(*row)
+
+    console = Console()
+    console.print(table)
 
 
 if __name__ == "__main__":
